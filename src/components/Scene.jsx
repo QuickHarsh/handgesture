@@ -2,13 +2,9 @@ import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import { EffectComposer, Bloom } from '@react-three/postprocessing';
 import { ParticleSystem } from './ParticleSystem';
-import { type HandData } from './HandTracker';
 
-interface SceneProps {
-    handData: React.MutableRefObject<HandData>;
-}
 
-export function Scene({ handData }: SceneProps) {
+export function Scene({ handData }) {
     return (
         <div className="absolute inset-0 z-0 bg-black">
             <Canvas

@@ -1,9 +1,8 @@
 
-export type ShapeType = 'sphere' | 'heart' | 'flower' | 'saturn' | 'spiral' | 'dna';
 
 const COUNT = 20000; // Number of particles
 
-export function generateShape(type: ShapeType, count: number = COUNT, radius: number = 2): Float32Array {
+export function generateShape(type, count = COUNT, radius = 2) {
     const positions = new Float32Array(count * 3);
 
     for (let i = 0; i < count; i++) {

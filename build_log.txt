@@ -1,0 +1,26 @@
+
+> handgesture@0.0.0 build
+> vite build
+
+rolldown-vite v7.2.5 building client environment for production...
+[2Ktransforming...✓ 597 modules transformed.
+rendering chunks...
+✗ Build failed in 667ms
+error during build:
+Build failed with 1 error:
+
+[31m[MISSING_EXPORT] Error:[0m "DrawingUtils" is not exported by "node_modules/@mediapipe/tasks-vision/vision_bundle.mjs".
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/components/HandTracker.jsx:2:43 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m2 │[0m [38;5;249mi[0m[38;5;249mm[0m[38;5;249mp[0m[38;5;249mo[0m[38;5;249mr[0m[38;5;249mt[0m[38;5;249m [0m[38;5;249m{[0m[38;5;249m [0m[38;5;249mF[0m[38;5;249mi[0m[38;5;249ml[0m[38;5;249me[0m[38;5;249ms[0m[38;5;249me[0m[38;5;249mt[0m[38;5;249mR[0m[38;5;249me[0m[38;5;249ms[0m[38;5;249mo[0m[38;5;249ml[0m[38;5;249mv[0m[38;5;249me[0m[38;5;249mr[0m[38;5;249m,[0m[38;5;249m [0m[38;5;249mH[0m[38;5;249ma[0m[38;5;249mn[0m[38;5;249md[0m[38;5;249mL[0m[38;5;249ma[0m[38;5;249mn[0m[38;5;249md[0m[38;5;249mm[0m[38;5;249ma[0m[38;5;249mr[0m[38;5;249mk[0m[38;5;249me[0m[38;5;249mr[0m[38;5;249m,[0m[38;5;249m [0mDrawingUtils[38;5;249m [0m[38;5;249m}[0m[38;5;249m [0m[38;5;249mf[0m[38;5;249mr[0m[38;5;249mo[0m[38;5;249mm[0m[38;5;249m [0m[38;5;249m"[0m[38;5;249m@[0m[38;5;249mm[0m[38;5;249me[0m[38;5;249md[0m[38;5;249mi[0m[38;5;249ma[0m[38;5;249mp[0m[38;5;249mi[0m[38;5;249mp[0m[38;5;249me[0m[38;5;249m/[0m[38;5;249mt[0m[38;5;249ma[0m[38;5;249ms[0m[38;5;249mk[0m[38;5;249ms[0m[38;5;249m-[0m[38;5;249mv[0m[38;5;249mi[0m[38;5;249ms[0m[38;5;249mi[0m[38;5;249mo[0m[38;5;249mn[0m[38;5;249m"[0m[38;5;249m;[0m
+ [38;5;240m  │[0m                                           ──────┬─────  
+ [38;5;240m  │[0m                                                 ╰─────── Missing export
+[38;5;246m───╯[0m
+
+    at aggregateBindingErrorsIntoJsError (file:///Users/harshpatel/Desktop/handgesture/node_modules/rolldown/dist/shared/src-CYkh2Ybc.mjs:2659:18)
+    at unwrapBindingResult (file:///Users/harshpatel/Desktop/handgesture/node_modules/rolldown/dist/shared/src-CYkh2Ybc.mjs:2634:128)
+    at #build (file:///Users/harshpatel/Desktop/handgesture/node_modules/rolldown/dist/shared/src-CYkh2Ybc.mjs:4433:34)
+    at async buildEnvironment (file:///Users/harshpatel/Desktop/handgesture/node_modules/vite/dist/node/chunks/node.js:33468:64)
+    at async Object.build (file:///Users/harshpatel/Desktop/handgesture/node_modules/vite/dist/node/chunks/node.js:33871:19)
+    at async Object.buildApp (file:///Users/harshpatel/Desktop/handgesture/node_modules/vite/dist/node/chunks/node.js:33868:153)
+    at async CAC.<anonymous> (file:///Users/harshpatel/Desktop/handgesture/node_modules/vite/dist/node/cli.js:629:3)

@@ -1,16 +1,12 @@
 import { useRef, useMemo, useEffect, useState } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
-import { generateShape, type ShapeType } from '../utils/shapes';
+import { generateShape } from '../utils/shapes';
 import { ParticleShaderMaterial } from '../materials/ParticleShader';
-import { type HandData } from './HandTracker';
 
-interface ParticleSystemProps {
-    handData: React.MutableRefObject<HandData>;
-}
 
 const COUNT = 20000;
-const SHAPES: ShapeType[] = ['sphere', 'heart', 'flower', 'saturn', 'spiral', 'dna'];
+const SHAPES = ['sphere', 'heart', 'flower', 'saturn', 'spiral', 'dna'];
 const COLORS = [
     ['#ff0088', '#00ffff'], // sphere
     ['#ff0000', '#ff8800'], // heart
@@ -20,14 +16,14 @@ const COLORS = [
     ['#00ff88', '#0088ff'], // dna
 ];
 
-export function ParticleSystem({ handData }: ParticleSystemProps) {
-    const meshRef = useRef<THREE.Points>(null);
-    const materialRef = useRef<THREE.ShaderMaterial>(null);
+export function ParticleSystem({ handData }) {
+    const meshRef = useRef(null);
+    const materialRef = useRef(null);
     const { viewport } = useThree();
 
     // Store all shapes data in memory
     const shapesData = useMemo(() => {
-        const data: Record<string, Float32Array> = {};
+        const data = {};
         SHAPES.forEach(type => {
             data[type] = generateShape(type, COUNT, 3);
         });
@@ -144,7 +140,7 @@ export function ParticleSystem({ handData }: ParticleSystemProps) {
         }
     });
 
-    const changeShape = (index: number) => {
+    const changeShape = (index) => {
         if (isMorphing || index === currentShapeIndex) return;
 
         // Setup transition
@@ -154,8 +150,8 @@ export function ParticleSystem({ handData }: ParticleSystemProps) {
 
         // Update target colors
         const colors = COLORS[index];
-        materialRef.current!.uniforms.uColor1.value.set(colors[0]);
-        materialRef.current!.uniforms.uColor2.value.set(colors[1]);
+        materialRef.current.uniforms.uColor1.value.set(colors[0]);
+        materialRef.current.uniforms.uColor2.value.set(colors[1]);
 
         setCurrentShapeIndex(index);
         setIsMorphing(true);
@@ -174,7 +170,7 @@ export function ParticleSystem({ handData }: ParticleSystemProps) {
 
     // Let's bind 'Spcae' key to switch shape
     useEffect(() => {
-        const handleKey = (e: KeyboardEvent) => {
+        const handleKey = (e) => {
             if (e.code === 'Space') {
                 changeShape((currentShapeIndex + 1) % SHAPES.length);
             }

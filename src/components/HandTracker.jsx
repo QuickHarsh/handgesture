@@ -1,26 +1,15 @@
 import { useEffect, useRef } from 'react';
-import { FilesetResolver, HandLandmarker, DrawingUtils, type HandLandmarkerResult } from '@mediapipe/tasks-vision';
+import { FilesetResolver, HandLandmarker } from '@mediapipe/tasks-vision';
 
-export type HandData = {
-    landmarks: any[];
-    worldLandmarks: any[];
-    isPresent: boolean;
-    gesture: string; // 'Open', 'Closed', 'Pinch', etc.
-    position: { x: number; y: number }; // Average center of palm
-};
 
-interface HandTrackerProps {
-    onHandUpdate: (data: HandData) => void;
-    debug?: boolean;
-}
 
-export function HandTracker({ onHandUpdate, debug = false }: HandTrackerProps) {
-    const videoRef = useRef<HTMLVideoElement>(null);
-    const canvasRef = useRef<HTMLCanvasElement>(null);
-    const landmarkerRef = useRef<HandLandmarker | null>(null);
+export function HandTracker({ onHandUpdate, debug = false }) {
+    const videoRef = useRef(null);
+    const canvasRef = useRef(null);
+    const landmarkerRef = useRef(null);
 
     useEffect(() => {
-        let animationFrameId: number;
+        let animationFrameId;
 
         const setupMediaPipe = async () => {
             const vision = await FilesetResolver.forVisionTasks(
@@ -64,7 +53,7 @@ export function HandTracker({ onHandUpdate, debug = false }: HandTrackerProps) {
             if (video.videoWidth > 0 && video.videoHeight > 0) {
                 // Prepare results
                 const startTimeMs = performance.now();
-                const result: HandLandmarkerResult = landmarkerRef.current.detectForVideo(video, startTimeMs);
+                const result = landmarkerRef.current.detectForVideo(video, startTimeMs);
 
                 // Debug drawing
                 if (debug && ctx) {
@@ -75,12 +64,23 @@ export function HandTracker({ onHandUpdate, debug = false }: HandTrackerProps) {
                     }
 
                     ctx.clearRect(0, 0, canvas.width, canvas.height);
-                    const drawingUtils = new DrawingUtils(ctx);
+                    // const drawingUtils = new DrawingUtils(ctx);
 
                     if (result.landmarks) {
                         for (const landmarks of result.landmarks) {
-                            drawingUtils.drawConnectors(landmarks, HandLandmarker.HAND_CONNECTIONS);
-                            drawingUtils.drawLandmarks(landmarks, { radius: 1 });
+                            // drawingUtils.drawConnectors(landmarks, HandLandmarker.HAND_CONNECTIONS);
+                            // drawingUtils.drawLandmarks(landmarks, { radius: 1 });
+
+                            // Simple fallback debug drawing
+                            ctx.fillStyle = '#00FF00'; // Green for high contrast
+                            ctx.strokeStyle = 'white';
+                            ctx.lineWidth = 2;
+                            for (const p of landmarks) {
+                                ctx.beginPath();
+                                ctx.arc(p.x * canvas.width, p.y * canvas.height, 8, 0, 2 * Math.PI); // Radius 8
+                                ctx.fill();
+                                ctx.stroke();
+                            }
                         }
                     }
                 }
@@ -153,7 +153,7 @@ export function HandTracker({ onHandUpdate, debug = false }: HandTrackerProps) {
 
         return () => {
             if (videoRef.current && videoRef.current.srcObject) {
-                const stream = videoRef.current.srcObject as MediaStream;
+                const stream = videoRef.current.srcObject;
                 stream.getTracks().forEach(track => track.stop());
             }
             cancelAnimationFrame(animationFrameId);

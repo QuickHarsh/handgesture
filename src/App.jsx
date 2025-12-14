@@ -1,9 +1,9 @@
 import { useRef, useState } from 'react';
-import { HandTracker, type HandData } from './components/HandTracker';
+import { HandTracker } from './components/HandTracker';
 import { Scene } from './components/Scene';
 
 function App() {
-  const handDataRef = useRef<HandData>({
+  const handDataRef = useRef({
     landmarks: [],
     worldLandmarks: [],
     isPresent: false,

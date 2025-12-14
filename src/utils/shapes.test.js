@@ -15,7 +15,7 @@ describe('generateShape', () => {
     });
 
     it('should handle different shapes without crashing', () => {
-        const shapes = ['sphere', 'heart', 'flower', 'saturn', 'spiral'] as const;
+        const shapes = ['sphere', 'heart', 'flower', 'saturn', 'spiral'];
         shapes.forEach(shape => {
             const coords = generateShape(shape, 10);
             expect(coords.length).toBe(30);
