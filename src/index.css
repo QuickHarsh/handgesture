@@ -1,10 +1,35 @@
 @import "tailwindcss";
 
+:root {
+  --color-bg-primary: #000000;
+  --color-bg-overlay: rgba(0, 0, 0, 0.7);
+  --color-gradient-1: #1a1a1a;
+  --color-gradient-2: #2a2a2a;
+  --color-accent: #404040;
+  --border-radius: 16px;
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2rem;
+  --transition-speed: 0.3s;
+}
+
 body {
   margin: 0;
   padding: 0;
-  background-color: #000;
+  background: #000000;
   color: white;
   overflow: hidden;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+kbd {
+  font-family: 'Courier New', monospace;
+  font-size: 0.875rem;
 }
